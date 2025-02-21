@@ -45,4 +45,5 @@ contract SentimentVoting {
     function getVotes(string memory candidate) public view returns (uint256) {
         return votes[candidate];
     }
-}
+    }
+
