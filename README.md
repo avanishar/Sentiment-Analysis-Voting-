@@ -1,32 +1,25 @@
-Sentiment-Based Voting Smart Contract
+# Sentiment Analysis Voting Smart Contract
 
-Project Description
+## Project Description
+The **Sentiment Analysis Voting Smart Contract** is an Ethereum-based system that enables voting based on sentiment analysis. The contract assumes that sentiment scores are externally computed and assigned to predefined candidates. Voting power is determined by sentiment values, meaning a more positive sentiment gives more voting weight.
 
-The Sentiment-Based Voting Smart Contract is an Ethereum-based voting system that leverages sentiment analysis to determine the weight of votes. Instead of traditional voting where each vote has equal weight, this contract assigns voting power based on sentiment scores (ranging from 1 to 100). Users can cast their votes for predefined candidates, with their sentiment score determining the impact of their vote.
-Smart Contract Address 0xe5E1798c0c74bd7E35BDe0104E371dbdB3Ef4193
-Features
+## Smart Contract Address
+```
+0xe5E1798c0c74bd7E35BDe0104E371dbdB3Ef4193
+```
 
-Sentiment-driven weighted voting
+## Features
+- Sentiment-based weighted voting
+- Prevents double voting
+- Transparent vote tracking
 
-Prevents double voting
+## How It Works
+1. Sentiment scores are externally computed for candidates.
+2. Users vote for predefined candidates, with sentiment scores determining vote weight.
+3. The contract records votes and allows querying of candidate vote counts.
 
-Transparent vote tracking
-
-How It Works
-
-A user submits a vote along with a sentiment score (externally determined).
-
-The contract records the vote, weighting it based on the sentiment score.
-
-Users can query the vote count for a candidate.
-
-Usage
-
-To interact with the smart contract, use a Web3 interface or directly call the functions:
-License
-
-This project is licensed under the MIT License.
-
+## Smart Contract
+```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
@@ -38,12 +31,16 @@ contract SentimentVoting {
         require(!hasVoted[msg.sender], "Already voted");
         require(sentimentScore > 0 && sentimentScore <= 100, "Invalid sentiment score");
 
-        votes[candidate] += sentimentScore;
+        votes[candidate] += sentimentScore; 
         hasVoted[msg.sender] = true;
     }
 
     function getVotes(string memory candidate) public view returns (uint256) {
         return votes[candidate];
     }
-    }
+}
+```
+
+## License
+This project is licensed under the MIT License.
 
